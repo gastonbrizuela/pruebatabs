@@ -6,9 +6,12 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import ClearIcon from '@material-ui/icons/Clear';
+import SimpleCard from './Pos'
+
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+  const { children, value, index,...other } = props;
 
   return (
     <Typography
@@ -42,9 +45,18 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
+  icon: {
+    fontSize: 20,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    marginTop: 5,
+    marginRight: 5
+  }
 }));
 
-export default function SimpleTabs() {
+export default function SimpleTabs(props) {
+  const {tabs, handleClearTab} = props
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -52,24 +64,26 @@ export default function SimpleTabs() {
     setValue(newValue);
   }
 
-  return (
+  function handleOnClickRemove (tab){
+    setValue(tab-1);
+    console.log(tab-1);
+    handleClearTab(tab)
+  }
+
+  return (  
     <div className={classes.root}>
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+        <Tabs  value={value} onChange={handleChange} aria-label="simple tabs example" variant="scrollable">
+          {tabs.map(tab=>(
+            <Tab icon={<ClearIcon className={classes.icon} onClick={() => handleOnClickRemove(tab)} key={tab}/>} key={tab} label={"Factura " + (tab+1)} {...a11yProps({tab})} />
+          ))}
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      {tabs.map(tab=>(
+        <TabPanel key={tab} value={value} index={tab}>
+          {tab}
+        </TabPanel>
+          ))}
     </div>
   );
 }
