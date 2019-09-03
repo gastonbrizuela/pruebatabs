@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SimpleTabs from './Component/SimpleTabs'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
 
 function App() {
+  const classes = useStyles();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grid container spacing={1}>
+      <Grid item xs={11}>
+      <Paper className={classes.paper}>
+        <SimpleTabs></SimpleTabs>
+      </Paper>
+      </Grid>
+      <Grid item xs={1}>
+          <Paper className={classes.paper}>
+            <Button variant="contained" color="primary" className={classes.button}>
+              Factura
+            </Button>
+          </Paper>
+      </Grid>
+    </Grid>
   );
 }
 
