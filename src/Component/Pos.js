@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh"
   },
+  gridInterior:{
+    margin: theme.spacing(1)
+  },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -64,7 +67,7 @@ const Pos = () => {
   const [cliente, cambiarCliente] = useState();
   const [clienteMostrar, cambiarClienteMostrar] = useState(0)
 
-  let dicCliente ={0:{"nombre":"","apellido":"","Estado":""},1:{"nombre":"Gaston","apellido":"brizuela","Estado":"Activo"},2:{"nombre":"carlos","apellido":"Perez","Estado":"Activo"},3:{"nombre":"Rodrigo","apellido":"Mungo","Estado":"Inactivo"}}
+  let dicCliente ={0:{"nombre":"---","apellido":"---","Estado":"---"},1:{"nombre":"Gaston","apellido":"brizuela","Estado":"Activo"},2:{"nombre":"carlos","apellido":"Perez","Estado":"Activo"},3:{"nombre":"Rodrigo","apellido":"Mungo","Estado":"Inactivo"}}
 
   const handleSearchButton = ()=>{
       cambiarClienteMostrar(cliente)
@@ -73,7 +76,7 @@ const Pos = () => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={12} sm={2} md={2} component={Paper}>
+      <Grid item xs={12} sm={2} md={2}  className = {classes.gridInterior}>
         <Paper className={classes.formCustomer}>
           <InputBase 
             onChange = {e=>cambiarCliente(e.target.value)}
@@ -115,8 +118,8 @@ const Pos = () => {
           />
         </form> */}
       </Grid>
-      <Grid item xs={12} sm={7} md={7} component={Paper}></Grid>
-      <Grid item xs={12} sm={3} md={3} component={Paper} square></Grid>
+      <Grid item xs={12} sm={6} md={6} component={Paper} className = {classes.gridInterior}></Grid>
+      <Grid item xs={12} sm={3} md={3} component={Paper} className = {classes.gridInterior}></Grid>
     </Grid>
   );
 };
