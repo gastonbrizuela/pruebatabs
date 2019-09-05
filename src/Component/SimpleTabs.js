@@ -70,9 +70,7 @@ export default function SimpleTabs(props) {
   }
 
   function handleOnClickRemove (tab){
-    setValue(0)
     handleClearTab(tab)
-    console.log("value nuevo.."+ value)
   }
 
   return (  
@@ -80,13 +78,16 @@ export default function SimpleTabs(props) {
       <AppBar position="static" color="default">
         <Tabs  value={value} onChange={handleChange} aria-label="simple tabs example" variant="scrollable" textColor='primary' indicatorColor = "primary">
           {tabs.map(tab=>(
-            <Tab value={tab} icon={<ClearIcon className={classes.icon} onClick={() => handleOnClickRemove(tab)} key={tab}/>} key={tab} label={"Factura " + (tab+1)} {...a11yProps({tab})} />
-          ))}
+            <Tab value={tab.counter} icon={<ClearIcon className={classes.icon} onClick={() => handleOnClickRemove(tab.counter)}/>} key={tab.counter} label={tab.type +" "+(tab.counter+1)} {...a11yProps(tab.counter)} />
+          ))
+         }
         </Tabs>
       </AppBar>
       {tabs.map(tab=>(
-        <TabPanel key={tab} value={value} index={tab}>
-          <SimpleCard></SimpleCard>
+        <TabPanel key={tab.counter} value={value} index={tab.counter}>
+          {tab.type==='Facturacion'?<SimpleCard/>:
+          tab.type==='Reporting'?"Reporting":
+          tab.type==='inicio'?"inicio":null}
         </TabPanel>
           ))}
     </div>
