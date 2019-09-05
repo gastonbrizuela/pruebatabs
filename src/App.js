@@ -8,7 +8,7 @@ import WifiIcon from '@material-ui/icons/Wifi'
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { textAlign } from '@material-ui/system';
-
+import StatusConectionConteiner from './Component/commons/menu/status-connection/statusConnectionConteiner'
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -29,17 +29,6 @@ const useStyles = makeStyles(theme => ({
       display: 'none',
     }
   },
-  divider: {
-    margin: 4
-  },
-  alignHorizontal: {
-    display: "inline",
-    width: '100%',
-    fontSize: 10
-  },
-  iconWifi:{
-    color:"green"
-  }
 }));
 
 function App() {
@@ -95,16 +84,7 @@ function App() {
         </Card>
         <Card className={classes.paper}>
           <CardContent>
-            <Typography  component="p" >  
-                {"Estado de la conexion"}
-            </Typography>
-            <Divider className={classes.divider} />
-            <Grid container className={classes.alignHorizontal}>
-            <WifiIcon className={classes.iconWifi}></WifiIcon>
-            <Typography component="p" >  
-                {"Conectado"}
-            </Typography>
-            </Grid>
+              <StatusConectionConteiner></StatusConectionConteiner>
           </CardContent>
         </Card>
       </Grid>
